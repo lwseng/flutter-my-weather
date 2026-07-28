@@ -1,17 +1,47 @@
-# my_weather_app
+# Weather App
 
-A new Flutter project.
+A Flutter weather application that allows users to view current weather conditions, hourly forecasts, and daily forecasts. The app integrates with a weather API to retrieve real-time weather information and provides location-based weather searching and saved locations management.
 
-## Getting Started
+## Feature
+* View current weather information
+Temperature
+Weather condition
+Location details
+* View hourly and daily forecasts
+* Current location weather
+Retrieve weather based on device location
+* Saved locations
+Add, rename, and remove saved locations
+Switch between saved locations
+* Temperature unit setting
+Support Celsius and Fahrenheit
 
-This project is a starting point for a Flutter application.
+## Technology Stack
+* Flutter
+* Dart
+* Location service
+* Provider (State Management)
+* Shared Preferences (Local Storage)
 
-A few resources to get you started if this is your first Flutter project:
+# Getting Started
+## Prerequisites
+Flutter SDK
+Dart SDK
+Android Studio or Xcode
+## Installation
+```
+#Clone the repository:
+git clone <repository-url>
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+#Navigate to the project directory:
+cd weather_app
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#Install dependencies:
+flutter pub get
+
+#Run the application:
+flutter run
+```
+## Notes
+Location permission is required for retrieving weather based on the device location.
+Internet connection is required to fetch weather data.
