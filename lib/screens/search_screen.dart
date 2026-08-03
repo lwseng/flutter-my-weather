@@ -68,61 +68,64 @@ class _SearchScreenState extends State<SearchScreen> {
           isLoading: _isLoading,
           errorMessage: _errorMessage,
           onRetry: () => searchCity(_lastQuery),
-          content: Padding(
-            padding: const EdgeInsetsGeometry.all(20.0),
-            child: Column(
-              spacing: 20,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: SearchBar(
-                        controller: _searchController,
-                        hintText: 'Search city',
-                        focusNode: _searchFocusNode,
-                        onSubmitted: searchCity,
-                        elevation: WidgetStatePropertyAll(1),
-                      ),
-                    ),
-                    if (_searchFocusNode.hasFocus)
-                      IconButton(
-                        onPressed: () {
-                          _searchController.clear();
-                          _searchFocusNode.unfocus();
-                          setState(() {});
-                        },
-                        icon: const Icon(Icons.cancel, color: Colors.grey),
-                        iconSize: 30,
-                      ),
-                  ],
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: .start,
+          content: RefreshIndicator(
+            onRefresh: () => searchService.searchCity(_lastQuery),
+            child: Padding(
+              padding: const EdgeInsetsGeometry.all(20.0),
+              child: Column(
+                spacing: 20,
+                children: [
+                  Row(
                     children: [
-                      if (_lastQuery.isNotEmpty)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5, bottom: 5),
-                          child: Text(
-                            '${_locationData.length} results found',
-                            style: TextTheme.of(context).titleSmall,
-                            textAlign: .left,
-                          ),
-                        ),
                       Expanded(
-                        child: ListView.builder(
-                          itemBuilder: ((context, index) {
-                            return SearchResultSection(
-                              result: _locationData[index],
-                            );
-                          }),
-                          itemCount: _locationData.length,
+                        child: SearchBar(
+                          controller: _searchController,
+                          hintText: 'Search city',
+                          focusNode: _searchFocusNode,
+                          onSubmitted: searchCity,
+                          elevation: WidgetStatePropertyAll(1),
                         ),
                       ),
+                      if (_searchFocusNode.hasFocus)
+                        IconButton(
+                          onPressed: () {
+                            _searchController.clear();
+                            _searchFocusNode.unfocus();
+                            setState(() {});
+                          },
+                          icon: const Icon(Icons.cancel, color: Colors.grey),
+                          iconSize: 30,
+                        ),
                     ],
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: .start,
+                      children: [
+                        if (_lastQuery.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5, bottom: 5),
+                            child: Text(
+                              '${_locationData.length} results found',
+                              style: TextTheme.of(context).titleSmall,
+                              textAlign: .left,
+                            ),
+                          ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemBuilder: ((context, index) {
+                              return SearchResultSection(
+                                result: _locationData[index],
+                              );
+                            }),
+                            itemCount: _locationData.length,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
